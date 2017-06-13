@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 
+@python_2_unicode_compatible
 class Regione(models.Model):
     codice_regione = models.IntegerField(primary_key=True, verbose_name="codice Istat")
     name = models.CharField(max_length=300, db_index=True, verbose_name='nome')
@@ -14,6 +16,7 @@ class Regione(models.Model):
         verbose_name_plural = 'regioni'
 
 
+@python_2_unicode_compatible
 class CittaMetropolitana(models.Model):
     codice_cittametropolitana = models.IntegerField(primary_key=True, verbose_name="codice Istat")
     name = models.CharField(max_length=300, db_index=True, verbose_name="nome")
@@ -27,6 +30,7 @@ class CittaMetropolitana(models.Model):
         verbose_name_plural = 'città metropolitane'
 
 
+@python_2_unicode_compatible
 class Provincia(models.Model):
     codice_provincia = models.IntegerField(primary_key=True, verbose_name="codice Istat")
     name = models.CharField(max_length=300, db_index=True, verbose_name="Nome")
@@ -42,6 +46,7 @@ class Provincia(models.Model):
         verbose_name_plural = 'province'
 
 
+@python_2_unicode_compatible
 class Comune(models.Model):
     codice_istat = models.IntegerField(db_index=True, unique=True, verbose_name="codice Istat")
     codice_catastale = models.CharField(blank=True, null=True, max_length=50, db_index=True)
