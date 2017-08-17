@@ -57,6 +57,7 @@ class Comune(models.Model):
     altitudine = models.IntegerField(blank=True, null=True)
     superficie = models.FloatField(blank=True, null=True, verbose_name="superficie (kmq)")
     popolazione = models.IntegerField(blank=True, null=True)
+    label = models.CharField(blank=True, null=True, max_length=50 + 300, db_index=True, editable=False )
 
     class Meta:
         ordering = ['name']
@@ -64,4 +65,8 @@ class Comune(models.Model):
         verbose_name_plural = 'comuni'
 
     def __str__(self):
-        return '%s - %s' % (self.name, self.provincia.name)
+        return self.label if self.label else '%s - %s' % (self.name, self.provincia.name)
+
+    def save(self, *args, **kwargs):
+        self.label = '%s - %s' % (self.name, self.provincia.name) 
+        super(Comune, self).save(*args, **kwargs))
