@@ -68,5 +68,5 @@ class Comune(models.Model):
         return self.label if self.label else '%s - %s' % (self.name, self.provincia.name)
 
     def save(self, *args, **kwargs):
-        self.label = '%s - %s' % (self.name, self.provincia.name) 
+        self.label = '%s (%s)' % (self.name, self.provincia.name) 
         super(Comune, self).save(*args, **kwargs)
